@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+      <form method="post" action="#">
+        <label for="email"></label>
+        <input type="email" v-model.lazy="email" id="email">
+        <fieldset>
+          <legend>Interests</legend>
+          <div><input type="checkbox" v-model="selectedInterests" value="Running">Running</div>
+          <div><input type="checkbox" v-model="selectedInterests" value="Cycling">Cycling</div>
+          <div><input type="checkbox" v-model="selectedInterests" value="Swimming">Swimming</div>
+        </fieldset>
+        <input type="submit" value="Subscribe">
+        <p>entered email: {{email}}.</p>
+        <p>selected interests: {{selectedInterests}}.</p>
+      </form>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        email: 'dendi@example.com',
+        selectedInterests: ['Running', 'Swimming']
+      }
+    });
+  </script>
+</body>
+</html>
