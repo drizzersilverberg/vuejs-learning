@@ -1,24 +1,32 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Welcome to Vue</title>
   <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
 </head>
+
 <body>
   <div id="app">
-      <form method="post" action="#">
-        <label for="email"></label>
-        <input type="email" v-model.lazy="email" id="email">
-        <fieldset>
-          <legend>Interests</legend>
-          <div><input type="checkbox" v-model="selectedInterests" value="Running">Running</div>
-          <div><input type="checkbox" v-model="selectedInterests" value="Cycling">Cycling</div>
-          <div><input type="checkbox" v-model="selectedInterests" value="Swimming">Swimming</div>
-        </fieldset>
-        <input type="submit" value="Subscribe">
-        <p>entered email: {{email}}.</p>
-        <p>selected interests: {{selectedInterests}}.</p>
-      </form>
+    <form method="post" action="#">
+      <label for="email"></label>
+      <input type="email" v-model.lazy="email" id="email">
+      <fieldset>
+        <legend>Interests</legend>
+        <div v-for="(interest, index) in interests">
+          <input type="checkbox" v-model="selectedInterests" :value="interest.id">{{index+1}}. {{interest.name}}
+        </div>
+      </fieldset>
+      <input type="submit" value="Subscribe">
+      <p>entered email: {{email}}.</p>
+      <!-- <p v-show="selectedInterests.length > 0">selected interests: {{selectedInterests}}.</p> -->
+      <p v-if="selectedInterests.length == 3">You must be very active!</p>
+      <p v-else-if="selectedInterests.length > 0">selected interests: {{selectedInterests}}.</p>
+      <p v-else>Please select at least one interest.</p>
+      <div v-for="(value, key, index) in address">
+        {{index+1}}. {{key}}: {{value}}
+      </div>
+    </form>
   </div>
 
   <script>
@@ -26,9 +34,25 @@
       el: '#app',
       data: {
         email: 'dendi@example.com',
-        selectedInterests: ['Running', 'Swimming']
+        interests: [{
+          id: 1,
+          name: 'Running'
+        }, {
+          id: 2,
+          name: 'Swimming'
+        }, {
+          id: 3,
+          name: 'Cycling'
+        }],
+        selectedInterests: [],
+        address: {
+          street: '100 Broadway',
+          city: 'New York',
+          state: 'NY'
+        }
       }
     });
   </script>
 </body>
+
 </html>
