@@ -1,0 +1,13 @@
+[{
+  id: 2,
+  name: 'Printer',
+  description: 'A document printing machine'
+}, {
+  id: 4,
+  name: 'Speaker',
+  description: 'A analog or digital sound transmitter machine'
+}, {
+  id: 8,
+  name: 'Cooling Fan',
+  description: 'A heat blower machine'
+}]

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/jquery@3.1.1"></script>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    Got a question for our virtual agent? Just ask!
+    <input type="text" v-model="question"> {{response}}
+    <ul>
+      <li v-for="product in products">{{product.name}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        question: '',
+        response: '',
+        products: []
+      },
+      computed: {
+        // products: function() {
+          // this needs to return a value immediately, can't wait for Ajax response
+        // }
+      },
+      watch: {
+        question: function(newValue) {
+          if (newValue.indexOf('products') > -1) {
+            this.response = 'Sure, I can list the products for you';
+            // $.getJSON('http://www.example.com/api/products')
+            // .done(function(data) {
+            // vm.products = data;
+            // });
+            vm.products = [{
+              id: 2,
+              name: 'Printer',
+              description: 'A document printing machine'
+            }, {
+              id: 4,
+              name: 'Speaker',
+              description: 'A analog or digital sound transmitter machine'
+            }, {
+              id: 8,
+              name: 'Cooling Fan',
+              description: 'A heat blower machine'
+            }]
+
+          } else {
+            this.response = "Sorry, I don't understand that question";
+            this.products = [];
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
