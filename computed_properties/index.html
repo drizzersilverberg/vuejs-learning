@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model.number.lazy="tempFahrenheit"> Temperature in Celcius: {{tempCelcius}}
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        tempFahrenheit: 0
+      },
+      computed: {
+        tempCelcius: function() {
+          console.log("using computed property");
+          return Math.round(5 / 9 * (this.tempFahrenheit - 32));
+        }
+      },
+      methods: {
+        tempCelciusFunc: function() {
+          console.log('using method');
+          return Math.round(5 / 9 * (this.tempFahrenheit - 32));
+        }
+      }
+    });
+
+    // you can try these on browser's console (remove/disable/comment these commands first );
+    vm.tempCelcius // this function will only executed if there is a change (cached)
+    vm.tempCelciusFunc // this function always executed on call, wether there is a change or not. So this might be cost process
+  </script>
+
+</body>
+
+</html>
