@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/jquery@3.1.1"></script>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    Got a question for our virtual agent? Just ask!
+    <input type="text" v-model="question"> {{response}}
+    <ul>
+      <li v-for="product in products">{{product.name}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        question: '',
+        response: '',
+        products: []
+      },
+      beforeCreate: function() {
+        console.log('beforeCreate');
+        this.question = 'A default question about products?';
+      },
+      created: function() {
+        console.log('created');
+      },
+      beforeMount: function() {
+        console.log('beforeMount');
+      },
+      mounted: function() {
+        console.log('mounted');
+      },
+      beforeUpdate: function() {
+        console.log('beforeUpdate');
+      },
+      updated: function() {
+        console.log('updated');
+      },
+      beforeDestroy: function() {
+        console.log('beforeDestroy');
+      },
+      destroyed: function() {
+        console.log('destroyed');
+      },
+      watch: {
+        question: function(newValue) {
+          if (newValue.indexOf('products') > -1) {
+            this.response = 'Sure, I can list the products for you';
+            // $.getJSON('http://www.example.com/api/products')
+            // .done(function(data) {
+            // vm.products = data;
+            // });
+            vm.products = [{
+              id: 2,
+              name: 'Printer',
+              description: 'A document printing machine'
+            }, {
+              id: 4,
+              name: 'Speaker',
+              description: 'A analog or digital sound transmitter machine'
+            }, {
+              id: 8,
+              name: 'Cooling Fan',
+              description: 'A heat blower machine'
+            }]
+
+          } else {
+            this.response = "Sorry, I don't understand that question";
+            this.products = [];
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
