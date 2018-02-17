@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <p>
+      {{ firstName}} {{ lastName}}
+    </p>
+    <div v-for="fw in frameworks">{{fw}}</div>
+    <p>{{browser.name}} {{browser.version}}</p>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName: 'Dendi',
+        lastName: '',
+        frameworks: ['Ember', 'Angular', 'React'],
+        browser: {
+          name: 'Google Chrome'
+        }
+      }
+    });
+
+    // you can try these on browser's console (remove/disable these commands first );
+    vm.lastName = 'Handian';
+    vm.frameworks[3] = 'jQuery'; // this won't be reactive
+    vm.frameworks.push('Vue'); // this will be reactive
+    vm.browser.version = 55; // this won't be reactive
+    Vue.set(vm.browser, 'version', 55); // this will be reactive
+  </script>
+
+</body>
+
+</html>
