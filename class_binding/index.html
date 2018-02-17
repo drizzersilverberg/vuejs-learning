@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <div :class="{square: true, blue: cold, red: hot}"></div>
+    <div :class="cssClasses"></div>
+    <input type="text" v-model="bgColorClass">
+    <div :class="[squareClass, bgColorClass, {'dashed-border': selected}]"></div>
+  </div>
+
+  <script>
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        cold: true,
+        hot: false,
+        cssClasses: {
+          square: true,
+          'dashed-border': true,
+          blue: false
+        },
+        squareClass: 'square',
+        bgColorClass: 'red',
+        selected: true
+      }
+    });
+  </script>
+  <style>
+    .square {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+
+    .blue {
+      background-color: blue;
+    }
+
+    .red {
+      background-color: red;
+    }
+
+    .yellow {
+      background-color: yellow;
+    }
+
+    .dashed-border {
+      border: dashed 4px black;
+    }
+  </style>
+</body>
+
+</html>
