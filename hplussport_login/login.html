@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <form>
+      <button v-if="!loggedIn" v-on:click="logIn('Dendi', $event)">Log in</button>
+      <button v-else @click.prevent="logOut">Log out</button> {{msg}}
+    </form>
+  </div>
+
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        msg: '',
+        loggedIn: false
+      },
+      methods: {
+        logIn: function(username, event) {
+          event.preventDefault(); // prevent from reloading page by <form> tag
+          this.loggedIn = true;
+          this.msg = 'Welcome, ' + username + '!';
+        },
+        logOut: function() {
+          this.loggedIn = false;
+          this.msg = 'So long!';
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
