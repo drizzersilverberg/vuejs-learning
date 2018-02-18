@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <product-list :products="theProducts" the-title="Shop our award-winning product line"></product-list> -->
+    <button v-if="listType == 'product-list'" @click="listType = 'product-list-simple'">Show less detail</button>
+    <button v-else @click="listType = 'product-list'">Show more detail</button>
+    <component :is="listType" :products="theProducts" the-title="Shop our award-winning product line"></component>
+  </div>
+  <script>
+    Vue.component('product-list', {
+      template: '<div class="product-list">\
+                    <h2>{{theTitle}}</h2>\
+                    <ul>\
+                      <product-list-item v-for="product in products" :product="product">\
+                      </product-list-item>\
+                    </ul>\
+                  </div>',
+      props: ['theTitle', 'products']
+    });
+
+    Vue.component('product-list-simple', {
+      template: '<div class="product-list">\
+                    <h2>{{theTitle}}</h2>\
+                    <ul>\
+                      <li v-for="product in products">\
+                        <img :src="product.image" class="small" /> {{product.name}}\
+                      </li>\
+                    </ul>\
+                  </div>',
+      props: ['theTitle', 'products']
+    });
+
+    Vue.component('product-list-item', {
+      template: '<li>\
+                    <img :src="product.image" />\
+                    <p><strong>{{product.name}}</strong></p>\
+                    <p>{{product.description}}</p>\
+                  </li>',
+      props: ['product']
+    });
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        theProducts: [],
+        listType: 'product-list'
+      },
+      created: function() {
+        // $.getJSON('https://example.com/api/products')
+        // .done(function(data) {
+        // vm.theProducts = data;
+        // });
+
+        this.theProducts = [{
+          image: 'https://avatars3.githubusercontent.com/u/8045818?s=460&v=4',
+          name: 'A fancy logo',
+          description: 'lorem ipsum dolor sit amet'
+        }];
+      }
+    });
+  </script>
+</body>
+<style>
+  .product-list h2 {
+    margin-bottom: 40px;
+  }
+
+  .product-list ul img {
+    float: left;
+    width: 300px;
+  }
+
+  .product-list ul {
+    list-style-type: none;
+  }
+
+  .product-list li {
+    margin-bottom: 40px;
+    clear: both;
+  }
+
+  .product-list img.small {
+    width: 100px;
+  }
+</style>
+
+</html>
