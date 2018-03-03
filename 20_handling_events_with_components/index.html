@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Welcome to Vue</title>
+  <script src="https://unpkg.com/vue@2.5.13/dist/vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <product-list :products="theProducts" title="Shop our award-winning product line"></product-list>
+  </div>
+
+  <script>
+    Vue.component('product-list', {
+      template: '<div class="product-list">\
+                        <h2>{{title}}</h2>\
+                        <ul>\
+                            <product-list-item v-for="product in products" :product="product">\
+                            </product-list-item>\
+                        </ul>\
+                    </div>',
+      props: ['products', 'title']
+    });
+
+    Vue.component('product-list-item', {
+      template: '<li>\
+                    <img :src="product.image">\
+                    <p><strong>{{product.name}}</strong></p>\
+                    <p>{{product.description}}</p>\
+                </li>',
+      props: ['product']
+    });
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        theProducts: []
+      },
+      created: function() {
+        // $.getJSON('https://hplussport.com/api/products.php?function=products')
+        //   .done(function(data) {
+        //     vm.theProducts = data;
+        //   });
+        this.theProducts = [{
+          image: 'https://avatars3.githubusercontent.com/u/8045818?s=460&v=4',
+          name: 'A fancy logo',
+          description: 'lorem ipsum dolor sit amet'
+        }];
+      }
+    });
+  </script>
+
+  <style>
+    .product-list h2 {
+      margin-bottom: 40px;
+    }
+
+    .product-list ul img {
+      float: left;
+      width: 300px;
+    }
+
+    .product-list ul {
+      list-style-type: none;
+    }
+
+    .product-list li {
+      margin-bottom: 40px;
+      clear: both;
+    }
+
+    .product-list img.small {
+      width: 100px;
+    }
+  </style>
+</body>
+
+</html>
